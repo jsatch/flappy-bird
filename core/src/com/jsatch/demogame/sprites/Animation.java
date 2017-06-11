@@ -29,7 +29,7 @@ public class Animation {
     public void update(float dt){
         mCurrentFrameTime += dt;
 
-        if (mMaxFrameTime > mMaxFrameTime){
+        if (mCurrentFrameTime > mMaxFrameTime){
             mCurrentFrameIndex++;
             mCurrentFrameTime = 0;
         }

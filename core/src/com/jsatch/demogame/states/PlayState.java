@@ -35,8 +35,6 @@ public class PlayState extends State {
         mPosGround1 = new Vector3(mCam.position.x - (mCam.viewportWidth / 2), GROUND_OFFSET ,0);
         mPosGround2 = new Vector3(mCam.position.x - (mCam.viewportWidth / 2) + mGround.getWidth(),
                 GROUND_OFFSET ,0);
-        System.out.println(mPosGround1.x);
-        System.out.println(mPosGround2.x);
 
         mTubes = new Array<Tube>();
         for (int i=1; i<= TUBE_COUNT; i++){

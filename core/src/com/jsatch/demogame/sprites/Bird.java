@@ -2,6 +2,7 @@ package com.jsatch.demogame.sprites;
 
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
@@ -13,16 +14,20 @@ public class Bird {
     private Vector3 mVelocidad;
     private Rectangle mBounds;
 
-    private Texture mBird;
+    Texture mTexAnimBird;
+    Animation mBirdAnimation;
 
     public Bird(int x, int y) {
         mPosicion = new Vector3(x, y, 0);
         mVelocidad = new Vector3(0, 0, 0);
-        mBird = new Texture("bird_rojo_1.png");
-        mBounds = new Rectangle(mPosicion.x, mPosicion.y, mBird.getWidth(), mBird.getHeight());
+        mTexAnimBird = new Texture("birdanimation.png");
+        mBirdAnimation = new Animation(new TextureRegion(mTexAnimBird), 3, 0.5f);
+        mBounds = new Rectangle(mPosicion.x, mPosicion.y, mTexAnimBird.getWidth() / 3,
+                mTexAnimBird.getHeight());
     }
 
     public void update(float dt){
+        mBirdAnimation.update(dt);
         if (mPosicion.y > 0) {
             mVelocidad.add(0, GRAVITY, 0);
         }
@@ -44,8 +49,8 @@ public class Bird {
         return mPosicion;
     }
 
-    public Texture getTexture() {
-        return mBird;
+    public TextureRegion getTexture() {
+        return mBirdAnimation.getFrame();
     }
 
     public Rectangle getBounds() {
@@ -53,6 +58,6 @@ public class Bird {
     }
 
     public void dispose(){
-        mBird.dispose();
+        mTexAnimBird.dispose();
     }
 }
