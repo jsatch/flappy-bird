@@ -2,13 +2,16 @@ package com.jsatch.demogame.sprites;
 
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class Bird {
     private static final int GRAVITY = -15;
+    private static final int MOVEMENT = 50;
 
     private Vector3 mPosicion;
     private Vector3 mVelocidad;
+    private Rectangle mBounds;
 
     private Texture mBird;
 
@@ -16,6 +19,7 @@ public class Bird {
         mPosicion = new Vector3(x, y, 0);
         mVelocidad = new Vector3(0, 0, 0);
         mBird = new Texture("bird_rojo_1.png");
+        mBounds = new Rectangle(mPosicion.x, mPosicion.y, mBird.getWidth(), mBird.getHeight());
     }
 
     public void update(float dt){
@@ -24,7 +28,8 @@ public class Bird {
         }
         mVelocidad.scl(dt);
         //mPosicion.add(mVelocidad);
-        mPosicion.add(0, mVelocidad.y, 0);
+        mPosicion.add(MOVEMENT * dt, mVelocidad.y, 0);
+        mBounds.setPosition(mPosicion.x, mPosicion.y);
         if (mPosicion.y < 0){
             mPosicion.y = 0;
         }
@@ -41,5 +46,13 @@ public class Bird {
 
     public Texture getTexture() {
         return mBird;
+    }
+
+    public Rectangle getBounds() {
+        return mBounds;
+    }
+
+    public void dispose(){
+        mBird.dispose();
     }
 }

@@ -17,12 +17,12 @@ public class GameStateManager {
     }
 
     public void pop(){
-        mStates.pop();
+        mStates.pop().dispose();
     }
 
     public void set(State state){
-        mStates.pop();
-        mStates.push(state);
+        pop();
+        push(state);
     }
 
     public void update(float dt){
